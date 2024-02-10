@@ -6,13 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.1.0",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
-    "test": "vitest"
+    "react-redux": "^9.1.0"
   },
   "devDependencies": {
     "@testing-library/react": "^14.2.1",
