@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { Menu, Drawer, Button } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/auth/AuthContext";
 import { HeaderProps } from "../types/header";
 import Title from "./Title";
 
-const Header: React.FC<HeaderProps> = ({ links, brand }) => {
-  const { isAuthenticated } = useAuth();
+const Header: React.FC<HeaderProps> = ({
+  links,
+  brand,
+  isAuthenticated,
+  onLogout,
+  backgroundImage,
+}) => {
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   const showDrawer = () => {
@@ -20,7 +24,10 @@ const Header: React.FC<HeaderProps> = ({ links, brand }) => {
 
   return (
     <div className="relative shadow-md">
-      <div className="absolute inset-0 bg-cover bg-center bg-[url('/images/wallpaper_nomad_vibes.png')] h-full"></div>
+      <div
+        className="absolute inset-0 bg-cover bg-center h-full"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      ></div>
       <div className="relative flex flex-col h-[50vh] md:h-[940px]">
         <div className="container mx-auto px-4 py-2 flex justify-between items-center md:justify-start">
           <div className="md:hidden">
@@ -53,9 +60,12 @@ const Header: React.FC<HeaderProps> = ({ links, brand }) => {
               ))}
               {isAuthenticated ? (
                 <Menu.Item key="logout" style={{ borderBottom: "none" }}>
-                  <Link to="/logout" className="text-white/50 hover:text-white">
+                  <button
+                    onClick={onLogout}
+                    className="text-white/50 hover:text-white"
+                  >
                     Logout
-                  </Link>
+                  </button>
                 </Menu.Item>
               ) : (
                 <Menu.Item key="login" style={{ borderBottom: "none" }}>
@@ -86,9 +96,12 @@ const Header: React.FC<HeaderProps> = ({ links, brand }) => {
               ))}
               {isAuthenticated ? (
                 <Menu.Item key="logout" style={{ borderBottom: "none" }}>
-                  <Link to="/logout" className="text-white/50 hover:text-white">
+                  <button
+                    onClick={onLogout}
+                    className="text-white/50 hover:text-white"
+                  >
                     Logout
-                  </Link>
+                  </button>
                 </Menu.Item>
               ) : (
                 <Menu.Item key="login" style={{ borderBottom: "none" }}>

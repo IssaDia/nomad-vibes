@@ -1,32 +1,21 @@
-// src/stories/Header.stories.tsx
 
 import { BrowserRouter as Router } from "react-router-dom";
-import { AuthProvider } from "../context/auth/AuthContext";
+import { StoryFn } from "@storybook/react";
 import Header from "../designSystem/Header";
-import type { Meta, StoryFn } from "@storybook/react";
-import { BRAND } from "../utils/constants";
 import { links } from "../routes/routeConfig";
+import { BRAND } from "../utils/constants";
+import { withAuthProvider } from "../../.storybook/decorator";
 
-type HeaderArgs = {
-  brand: string;
-  links: { key: string; path: string; label: string }[];
-};
-
-const meta: Meta<typeof Header> = {
+export default {
+  title: "Components/Header",
   component: Header,
+  decorators: [withAuthProvider],
 };
-export default meta;
 
-const Template: StoryFn<HeaderArgs> = (args: HeaderArgs) => (
+const Template: StoryFn = () => (
   <Router>
-    <AuthProvider>
-      <Header {...args} />
-    </AuthProvider>
+    <Header brand={BRAND} links={links} />
   </Router>
 );
 
 export const Default = Template.bind({});
-Default.args = {
-  brand: BRAND,
-  links: links,
-};
