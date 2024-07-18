@@ -11,6 +11,7 @@ const Header: React.FC<HeaderProps> = ({
   isAuthenticated,
   onLogout,
   backgroundImage,
+  title,
 }) => {
   const [drawerVisible, setDrawerVisible] = useState(false);
 
@@ -115,7 +116,7 @@ const Header: React.FC<HeaderProps> = ({
         </div>
         <div className="flex justify-center items-center mt-4 md:mt-8">
           <Title
-            text="Pack your stuff and join an activity now."
+            text={title}
             size="5xl"
             color="text-white"
             margin="m-8"
